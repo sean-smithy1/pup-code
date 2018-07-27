@@ -29,8 +29,6 @@ node '1804-dnsmasq' {
     source => 'puppet:///server_configs/dnsmasq/dnsmasq.conf',
   }
 
+  include dnsmasq_1804
 }
 
-  include dnsmasq_1804
-  
-}
