@@ -16,7 +16,7 @@ node '1804-dnsmasq' {
   }
 
   file { '/etc/hosts':
-    source => 'puppet:///serverconfig/dnsmasq/hosts',
+    source => 'puppet:///modules/dnsmasq',
     mode => "0644",
     owner => 'root',
     group => 'root',
@@ -26,7 +26,7 @@ node '1804-dnsmasq' {
     mode => "0644",
     owner => 'root',
     group => 'root',
-    source => 'puppet:///serverconfig/dnsmasq/dnsmasq.conf',
+    source => 'puppet:///serverconfig/dnsmasq',
   }
 
   include dnsmasq_1804
