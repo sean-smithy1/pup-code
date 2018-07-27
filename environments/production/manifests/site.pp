@@ -9,13 +9,16 @@ node '1804-dnsmasq' {
 
   netplan::interface { 'ens3':
     addresses => [ '192.168.0.4/24' ],
-    dns => [ '192.168.0.4', '8.8.8.8' ],
+    dns => [ '127.0.0.1' ],
     search => [ 'comapps.net' ],
     gateway4 => '192.168.0.15',
     dhcp4 => false
   }
 
+  include dnsmasq_1804
+
   file { '/etc/hosts':
+    notify => Service['dnsmasq'],
     source => 'puppet:///modules/dnsmasq_1804/config/hosts',
     mode => "0644",
     owner => 'root',
@@ -29,6 +32,6 @@ node '1804-dnsmasq' {
     source => 'puppet:///modules/dnsmasq_1804/config/dnsmasq.conf',
   }
 
-  include dnsmasq_1804
+
 }
 
