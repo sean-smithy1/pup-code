@@ -5,7 +5,7 @@ node default {
 	}
 }
 
-node '1804-dns' {
+node '1804-dnsmasq' {
 
   netplan::interface { 'ens3':
     addresses => [ '192.168.0.20/24' ],
@@ -15,6 +15,22 @@ node '1804-dns' {
     dhcp4 => false
   }
 
+  file { '/etc/hosts':
+    source => 'puppet:///server_configs/dnsmasq/hosts',
+    mode => "0644",
+    owner => 'root',
+    group => 'root',
+  }
+  
+  file { '/etc/dnsmasq.conf':
+    mode => "0644",
+    owner => 'root',
+    group => 'root',
+    source => 'puppet:///server_configs/dnsmasq/dnsmasq.conf',
+  }
+
+}
+
   include dnsmasq_1804
-  include server_configs
+  
 }
